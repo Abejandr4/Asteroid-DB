@@ -6,7 +6,8 @@
     --space-dark: #0f172a; /* Texto oscuro */
     --primary-yellow: #621ad4; /* Amarillo principal / COLOR PRINCIPAL */
     --yellow-300: #fde047; /* Variante hover */
-    --accent-cyan: #b6bc7c; /* Valores de datos */
+    --accent-gray: #838795; /* Valores de datos */
+    --accent-blue: #162248; /* Valores de datos */
     --red-600: #dc2626; /* Hazardous tag */
     --green-600: #16a34a; /* Safe tag */
     --red-500: #ef4444; /* Hazardous indicator */
@@ -760,7 +761,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: rgba(250, 204, 21, 0.1);
+  background-color: var(--accent-blue);
   border: 1px solid var(--primary-yellow);
   border-radius: var(--border-radius-small);
   cursor: pointer;
@@ -771,7 +772,7 @@
 }
 
 .aiInsightsToggle:hover {
-  background-color: rgba(250, 204, 21, 0.2);
+  background-color: var(--accent-gray);
   transform: translateY(-2px);
 }
 
