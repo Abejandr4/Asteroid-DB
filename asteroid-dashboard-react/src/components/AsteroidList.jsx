@@ -80,8 +80,8 @@ function AsteroidList() {
   return (
     <div className="listContainer">
       {showInfoPopup && <FilterInfoPopup onClose={() => setShowInfoPopup(false)} />}
-<a href="https://neo-sphere-llub.vercel.app/" className='returnButton'>
-  Return to NEOSphere
+<a href="https://neo-sphere-pi.vercel.app/" className='returnButton'>
+  Regresar
 </a>      <div className="listTitleContainer">
           <h2 className="listTitle">Asteroid Catalog</h2>
         <button className="suggestionButton" onClick={() => setShowInfoPopup(true)}>?</button>
