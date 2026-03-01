@@ -4,6 +4,7 @@ import useAsteroidStore from '../store';
 import { motion, AnimatePresence } from 'framer-motion';
 import OrbitSimulator from './OrbitSimulator';
 import AsteroidAIInsights from './AsteroidAIInsights';
+
 // --- Reusable Popup Component ---
 function InfoPopup({ content, onClose }) {
   if (!content) return null;
@@ -86,26 +87,17 @@ const POPUP_DEFINITIONS = {
 function AsteroidDetails() {
   const { selectedAsteroid } = useAsteroidStore();
   const [popupContent, setPopupContent] = useState(null);
-  const [showSimulator, setShowSimulator] = useState(false);
+  // CHANGED: showSimulator is now true by default
+  const [showSimulator, setShowSimulator] = useState(true);
   const [simulatorKey, setSimulatorKey] = useState(0);
 
   useEffect(() => {
     if (selectedAsteroid) {
-      setShowSimulator(false);
+      // CHANGED: When a new asteroid is selected, we default back to the simulator view
+      setShowSimulator(true);
       setSimulatorKey((prev) => prev + 1);
     }
   }, [selectedAsteroid]);
-
-  if (showSimulator) {
-    return (
-      <div className="simulatorContainer">
-        <OrbitSimulator 
-          key={simulatorKey} 
-          onReturn={() => setShowSimulator(false)}
-        />
-      </div>
-    );
-  }
 
   if (!selectedAsteroid) {
     return (
@@ -113,6 +105,28 @@ function AsteroidDetails() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <p className="welcomeSubtitle">Select an asteroid to see its data</p>
         </motion.div>
+      </div>
+    );
+  }
+
+  // Logic to show the Simulator by default
+  if (showSimulator) {
+    return (
+      <div className="simulatorContainer" style={{ position: 'relative', height: '100%' }}>
+        {/* Floating button to toggle the details panel */}
+        <button 
+          className="simulatorActionButton" 
+          style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}
+          onClick={() => setShowSimulator(false)}
+        >
+          Show Meteor Details
+        </button>
+        
+        <OrbitSimulator 
+          key={simulatorKey} 
+          targetAsteroid={selectedAsteroid.full_name || selectedAsteroid.identificador}
+          onReturn={() => setShowSimulator(false)}
+        />
       </div>
     );
   }
@@ -134,10 +148,12 @@ function AsteroidDetails() {
       >
         <div className="detailsHeader">
           <h1 className="detailsTitle">{selectedAsteroid.full_name || selectedAsteroid.identificador}</h1>
+          {/* CHANGED: This button now returns the user to the default Orbit view */}
           <button className="simulatorButton" onClick={() => setShowSimulator(true)}>
-            Show Orbit Simulator
+            ← Back to Orbit
           </button>
         </div>
+        
         <AsteroidAIInsights className="AI" asteroid={selectedAsteroid} />
 
         <div className='moduleGroup'>

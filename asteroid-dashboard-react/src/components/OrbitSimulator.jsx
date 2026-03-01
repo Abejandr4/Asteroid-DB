@@ -42,7 +42,7 @@ function Sun() {
 }
 
 // Scene now accepts the full color objects as props and hideOrbits state
-function Scene({ planetColors, asteroidColor, hideOrbits, hiddenAsteroids }) {
+function Scene({ planetColors, asteroidColor, hideOrbits, hiddenAsteroids, targetAsteroid }) {
   const [orbits, setOrbits] = useState({});
   const [error, setError] = useState(null);
 
@@ -72,7 +72,7 @@ function Scene({ planetColors, asteroidColor, hideOrbits, hiddenAsteroids }) {
         const isPlanet = planetColors.hasOwnProperty(nombre);
         
         // Hide asteroid if it's in the hidden list and hideOrbits is active
-        if (!isPlanet && hideOrbits && hiddenAsteroids.current.includes(nombre)) {
+        if (!isPlanet && hideOrbits && targetAsteroid && nombre !== targetAsteroid && hiddenAsteroids.current.includes(nombre)) {
           return null;
         }
         
@@ -109,7 +109,7 @@ function Scene({ planetColors, asteroidColor, hideOrbits, hiddenAsteroids }) {
   );
 }
 
-function OrbitSimulator({ onReturn }) {
+function OrbitSimulator({ onReturn, targetAsteroid }) {
   const [planetColors, setPlanetColors] = useState(INITIAL_PLANET_COLORS);
   const [asteroidColor, setAsteroidColor] = useState('#8c949fff');
   const [canvasKey, setCanvasKey] = useState(0);
@@ -241,6 +241,7 @@ function OrbitSimulator({ onReturn }) {
             asteroidColor={asteroidColor}
             hideOrbits={hideOrbits}
             hiddenAsteroids={hiddenAsteroids}
+            targetAsteroid={targetAsteroid}
           />
           
           <OrbitControls minDistance={1} maxDistance={80} target={[0,-0.2,0]} />

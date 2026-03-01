@@ -83,7 +83,7 @@ function AsteroidList() {
 <a href="https://neo-sphere-pi.vercel.app/" className='returnButton'>
   Regresar
 </a>      <div className="listTitleContainer">
-          <h2 className="listTitle">Asteroid Catalog</h2>
+          <h2 className="listTitle">Catálogo de asteroides</h2>
         <button className="suggestionButton" onClick={() => setShowInfoPopup(true)}>?</button>
       </div>
       
@@ -99,17 +99,17 @@ function AsteroidList() {
           <button 
             onClick={() => setFilter('all')} 
             className={`tabButton ${filter === 'all' ? 'selected' : ''}`}>
-            All
+            Todos los asteroides
           </button>
           <button 
             onClick={() => setFilter('pha')} 
             className={`tabButton ${filter === 'pha' ? 'selected' : ''}`}>
-            Hazarodus
+            Peligrosos
           </button>
           <button 
             onClick={() => setFilter('non-pha')} 
             className={`tabButton ${filter === 'non-pha' ? 'selected' : ''}`}>
-            Non Hazardous
+            No peligrosos
           </button>
         </div>
         {/* New Filters */}
