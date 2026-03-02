@@ -112,16 +112,7 @@ function AsteroidDetails() {
   // Logic to show the Simulator by default
   if (showSimulator) {
     return (
-      <div className="simulatorContainer" style={{ position: 'relative', height: '100%' }}>
-        {/* Floating button to toggle the details panel */}
-        <button 
-          className="simulatorActionButton" 
-          style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}
-          onClick={() => setShowSimulator(false)}
-        >
-          Show Meteor Details
-        </button>
-        
+      <div className="simulatorContainer" style={{ position: 'relative', height: '100%' }}>        
         <OrbitSimulator 
           key={simulatorKey} 
           targetAsteroid={selectedAsteroid.full_name || selectedAsteroid.identificador}
